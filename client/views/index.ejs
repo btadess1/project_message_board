@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h2>This is the Echo group Message Board Page, To start sharing ideas, login or register</h2>
+	<form style="border: 1px solid gray; width:450px; margin: 15px; padding: 15px; background-color: lightgray" action="/create/user" method="POST">
+		<h3>Register</h3>
+		Last Nmae: <input type="text" name="last_name">
+		Email: <input type="text" name="email"><br><br>
+		Password: <input type="text" name="password"><br><br>
+		<input type="submit" value="Register"><br><br>
+	</form><br>
+	
+	<form style="border: 1px solid gray; width:300px; margin: 15px; padding:15px; background-color: lightgray" action="/login" method="POST">
+		<h3>Login</h3>
+			<% if(error.err != undefined){ %>
+		<h3 style="color: red"><%= error.err %></h3>
+		<% } %>
+		Email: <input type="text" name="email"><br><br>
+		Password: <input type="text" name="password"><br><br>
+		<input type="submit" value="Log In"><br><br>
+	</form><br>
+		
+</body>
+</html>
