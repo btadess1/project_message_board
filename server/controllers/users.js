@@ -15,7 +15,7 @@ module.exports = {
         if (user.length != 0) {
             session.username=req.body.last_name;
             console.log(user);
-            error.err ="";
+            error.err =0;
             res.redirect('/message/board');
         }else{
             error.err = 'Invalid user Id or password, try again';
