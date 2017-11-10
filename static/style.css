@@ -1,3 +1,135 @@
 body{
-	background-color: black;
+	background-color: slategrey;
+}
+#page_content{
+	min-height: calc(95vh);
+}
+h3, header, footer{
+	text-align: center;
+}
+header, footer{
+	background-color: lightblue;
+}
+header{
+	font-size: 200%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 90%;
+	margin: auto 5%;
+	display: block;
+}
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 90%;
+	margin: auto 5%;
+}
+.container{
+	padding: 15px;
+}
+.bordered{
+	border:1px solid #ccc!important;
+}
+.top_message{
+	text-align: center;
+	margin-top: 4%;
+}
+
+/* Form and Input Styling */
+form{
+	margin: auto;
+}
+label{
+	display: block;
+	font-weight: bold;
+	margin: 2%;
+}
+form input{
+	margin: auto 2%;
+	background-color: whitesmoke;
+	padding: 8px;
+	display: inline;
+	border: none;
+	border-bottom: 1px solid #ccc;
+}
+form input[type=text], form input[type=password]{
+	width: 70%;
+}
+form input[type=submit]{
+	margin-top: 4%;
+	width: 40%;
+}
+form input[type=button]{
+	width: 40%;
+	display: inline-block;
+}
+#register_form{
+	border: 1px solid gray;
+	//width: 450px;
+	//margin: 15px;
+	background-color: lightgrey;
+}
+#login_form{
+	border: 1px solid gray;
+	width: 300px;
+	//margin: 15px;
+	margin: auto;
+	padding: 15px;
+	background-color: lightgray;
+}
+#new_post_form{
+	width: 50%;
+	border: 1px solid whitesmoke;
+	margin: 0 2% 2%;
+	padding: 1%;
+}
+.comment_form{
+	width: 50%;
+	border: 1px solid whitesmoke;
+	margin: 0 2%;
+	padding: 1%;
+}
+/* Register Modal Content */
+#register_modal{
+	z-index: 3;
+	display: none;
+	padding-top: 100px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.4);
+}
+.modal_content {
+	margin: auto;
+	background-color: #fff;
+	position: relative;
+	padding: 0;
+	outline: 0;
+	width: 600px;
+}
+.modal_close_btn {
+	border: none;
+	display: inline-block;
+	outline: 0;
+	padding: 8px 16px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	background-color: inherit;
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.modal_close_btn:hover {
+	color: #000 !important;
+	background-color: #ccc !important;
 }

@@ -1,27 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Login Page: Team Echo</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h2>This is the Echo group Message Board Page, To start sharing ideas, login or register</h2>
-	<form style="border: 1px solid gray; width:450px; margin: 15px; padding: 15px; background-color: lightgray" action="/create/user" method="POST">
-		<h3>Register</h3>
-		Last Nmae: <input type="text" name="last_name">
-		Email: <input type="text" name="email"><br><br>
-		Password: <input type="text" name="password"><br><br>
-		<input type="submit" value="Register"><br><br>
-	</form><br>
-	
-	<form style="border: 1px solid gray; width:300px; margin: 15px; padding:15px; background-color: lightgray" action="/login" method="POST">
+<header>Echo Group Message Board Page</header>
+<div id="page_content">
+	<h2 class="top_message">Welcome to our App! To start sharing ideas, login or register</h2>
+
+	<div id="register_modal">
+		<div class="modal_content">
+			<div id="container">
+				<span onclick="document.getElementById('register_modal').style.display='none'" class="modal_close_btn">&times;</span>
+				<form id="register_form" action="/create/user" method="POST">
+					<h3>Register</h3>
+					<label for="last_name_input">Last Name: </label>
+					<input type="text" id="last_name_input" name="last_name" placeholder="Doe">
+					<label for="email_input">Email: </label>
+					<input type="text" id="email_input" name="email" placeholder="john.doe@email.com">
+					<label for="password_input">Password: </label>
+					<input type="password" id="password_input" name="password">
+					<input type="submit" value="Register">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<form id="login_form" action="/login" method="POST">
 		<h3>Login</h3>
+		<!--
 		<% if(error.err != 0){ %>
 			<h3 style="color: red"><%= error.err %></h3>
 		<% } %>
-		Email: <input type="text" name="email"><br><br>
-		Password: <input type="text" name="password"><br><br>
-		<input type="submit" value="Log In"><br><br>
-	</form><br>
-		
+		-->
+		<label for="login_email_input">Email: </label>
+		<input type="text" id="login_email_input" name="email" placeholder="john.doe@email.com">
+		<label for="login_password_input">Password: </label>
+		<input type="password" id="login_password_input" name="password">
+		<input type="submit" value="Log In">
+		<input type="button" value="Register" onclick="document.getElementById('register_modal').style.display ='block'">
+	</form>
+</div>
+<footer>Echo Team &copy; Fall 2017</footer>
 </body>
 </html>

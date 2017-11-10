@@ -1,34 +1,41 @@
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="./../static/style.css">
-		<script type="text/javascript">
-			
-		</script>
+		<title>Message Board: Team Echo</title>
+		<link rel="stylesheet" type="text/css" href="../style.css">
 	</head>
 
 	<body>
-	<h1>Welcome to the Echo Group Message Board Page</h1>
-		<form action="/post/message" method="POST">
-			Name: <input type="text" name="name"><br><br>
-			Post a Message: <input type="text" name="message"><br><br>
-			<input type="submit" value="Post Message"><br><br>
+	<header>Echo Group Message Board Page</header>
+	<div id="page_content">
+		<h1 class="top_message">Welcome to the Echo Group Message Board Page</h1>
+		<form id="new_post_form" action="/post/message" method="POST">
+			<h2>New Post</h2>
+			<label for="name_field">Name:</label>
+			<input type="text" id="name_field" name="name"><br>
+			<label for="message_field">Post a Message:</label>
+			<input type="text" id="message_field" name="message"><br>
+			<input type="submit" value="Post Message">
 		</form>
+
 		<% for(var x in post){ %>
-			<div style="background-color: lightblue; margin-left: 15px; padding: 15px; border-radius: 5px">
-				<h3 style="color: blue">Posted By: <%= post[x].name %>, Date: <%= post[x].date %></h3>
-				<h3 style="color: yellow"><%= post[x].text %></h3>
-			
-				<% for(let i = 0; i < post[x].comments.length; i++){ %>
-					<h5 style="margin-left: 20px; color: blue"><%= post[x].comments[i].name %>, <%= post[x].comments[i].date %></h5>
-					<h5 style="margin-left: 20px"><%= post[x].comments[i].text %></h5>
-				<% } %>
-			</div>
-			<br>
-			<form action="/post/comment/<%= post[x]._id %>" method="POST">
-				Name: <input type="text" name="name">
-				comment: <input type="text" name="comment"><br><br>
-				<input type="submit" value="Post Comment"><br>
-			</form><br>
+		<div style="background-color: lightblue; margin-left: 15px; padding: 15px; border-radius: 5px">
+			<h3 style="color: blue">Posted By: <%= post[x].name %>, Date: <%= post[x].date %></h3>
+			<h3 style="color: black"><%= post[x].text %></h3>
+
+			<% for(let i = 0; i < post[x].comments.length; i++){ %>
+			<h5 style="margin-left: 20px; color: blue"><%= post[x].comments[i].name %>, <%= post[x].comments[i].date %></h5>
+			<h5 style="margin-left: 20px"><%= post[x].comments[i].text %></h5>
+			<% } %>
+		</div>
+		<br>
+		<form class="comment_form" action="/post/comment/<%= post[x]._id %>" method="POST">
+			<h3>New Comment</h3>
+			<label>Name: </label><input type="text" name="name">
+			<label>Comment: </label><input type="text" name="comment"><br><br>
+			<input type="submit" value="Post Comment"><br>
+		</form><br>
 		<% } %>
+	</div>
+	<footer>Echo Team &copy; Fall 2017</footer>
 	</body>
 </html>
