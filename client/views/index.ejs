@@ -16,11 +16,11 @@
 				<form id="register_form" action="/create/user" method="POST">
 					<h3>Register</h3>
 					<label for="last_name_input">Last Name: </label>
-					<input type="text" id="last_name_input" name="last_name" placeholder="Doe">
+					<input type="text" id="last_name_input" name="last_name" placeholder="Doe" required="true">
 					<label for="email_input">Email: </label>
-					<input type="text" id="email_input" name="email" placeholder="john.doe@email.com">
+					<input type="text" id="email_input" name="email" placeholder="john.doe@email.com" required="true">
 					<label for="password_input">Password: </label>
-					<input type="password" id="password_input" name="password">
+					<input type="password" id="password_input" name="password" required="true">
 					<input type="submit" value="Register">
 				</form>
 			</div>
@@ -29,15 +29,13 @@
 
 	<form id="login_form" action="/login" method="POST">
 		<h3>Login</h3>
-		<!--
 		<% if(error.err != 0){ %>
 			<h3 style="color: red"><%= error.err %></h3>
 		<% } %>
-		-->
 		<label for="login_email_input">Email: </label>
-		<input type="text" id="login_email_input" name="email" placeholder="john.doe@email.com">
+		<input type="text" id="login_email_input" name="email" placeholder="john.doe@email.com" required="true">
 		<label for="login_password_input">Password: </label>
-		<input type="password" id="login_password_input" name="password">
+		<input type="password" id="login_password_input" name="password" required="true">
 		<input type="submit" value="Log In">
 		<input type="button" value="Register" onclick="document.getElementById('register_modal').style.display ='block'">
 	</form>
