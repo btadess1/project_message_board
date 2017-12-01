@@ -1,4 +1,4 @@
-<html>
+ <html>
 	<head>
 		<title>Message Board: Team Echo</title>
 		<link rel="stylesheet" type="text/css" href="../style.css">
@@ -11,9 +11,9 @@
 		<form id="new_post_form" action="/post/message" method="POST">
 			<h2>New Post</h2>
 			<label for="name_field">Name:</label>
-			<input type="text" id="name_field" name="name"><br>
+			<input type="text" id="name_field" name="name" required="true"><br>
 			<label for="message_field">Post a Message:</label>
-			<input type="text" id="message_field" name="message"><br>
+			<input type="text" id="message_field" name="message" required="true"><br>
 			<input type="submit" value="Post Message">
 		</form>
 
@@ -30,8 +30,8 @@
 		<br>
 		<form class="comment_form" action="/post/comment/<%= post[x]._id %>" method="POST">
 			<h3>New Comment</h3>
-			<label>Name: </label><input type="text" name="name">
-			<label>Comment: </label><input type="text" name="comment"><br><br>
+			<label>Name: </label><input type="text" name="name" required="true">
+			<label>Comment: </label><input type="text" name="comment" required="true"><br><br>
 			<input type="submit" value="Post Comment"><br>
 		</form><br>
 		<% } %>
