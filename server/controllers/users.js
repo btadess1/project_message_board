@@ -8,7 +8,7 @@ module.exports = {
     res.render('index', {error:error});
   },
   login: function(req, res){
-    User.find({email: req.body.email}, function(err, user){
+    User.find({email: req.body.email, password:req.body.password}, function(err, user){
         if(err) { 
           console.log('Error'); 
         } 
