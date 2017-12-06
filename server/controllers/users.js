@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var session = require('session');
+
 var error = {};
 module.exports = {
   main: function(req, res){
@@ -8,12 +8,17 @@ module.exports = {
     res.render('index', {error:error});
   },
   login: function(req, res){
-    User.find({email: req.body.email, password:req.body.password}, function(err, user){
-        if(err) { 
-          console.log('Error'); 
-        } 
+    User.find({
+      email: req.body.email,
+      password:req.body.password
+    }).lean().exec(function(err, user){
+        if(err) {
+          console.log('Error');
+        }
         if (user.length != 0) {
-            session.username=req.body.last_name;
+            var session = req.session;
+            //set username to be displayed in message board
+            session.username = user[0].last_name;
             console.log(user);
             error.err =0;
             res.redirect('/message/board');
@@ -21,9 +26,9 @@ module.exports = {
             error.err = 'Invalid user Id or password, try again';
             res.redirect('/');
         }
-      
+
     })
-    
+
   },
   register: function(req, res) {
     var user = new User({last_name: req.body.last_name, email: req.body.email, password: req.body.password});

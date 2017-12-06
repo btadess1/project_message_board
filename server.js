@@ -17,6 +17,10 @@ app.use(express.static(path.join(__dirname, './static')));
 app.set('views', path.join(__dirname, './client/views'));
 // Setting our View Engine set to EJS
 app.set('view engine', 'ejs');
+// require session for setting username
+var session = require('express-session');
+//initialize the session (secret prop is required)
+app.use(session({secret: 'EchoAppp'}));
 
 var routes_setter = require('./server/config/routes.js');
 // invoke the function stored in routes_setter and pass it the "app" variable

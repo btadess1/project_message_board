@@ -2,10 +2,64 @@
 	<head>
 		<title>Message Board: Team Echo</title>
 		<link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../jquery-ui-1.12.1.custom/jquery-ui.css">
+    <script src="../jquery-3.1.1.js"></script>
+    <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script>
+      var dialog, form, actionVal, newActionVal;
+
+      $( function() {
+
+        dialog = $( "#dialog-form" ).dialog({
+          autoOpen: false,
+          height: 400,
+          width: 350,
+          modal: true,
+          buttons: {
+            "Add Comment": function(){
+              $(form).attr("action", newActionVal);
+              $(form).submit();
+            },
+            Cancel: function() {
+              dialog.dialog( "close" );
+            }
+          },
+          close: function() {
+            form[ 0 ].reset();
+          }
+        });
+
+        form = dialog.find( "form" );
+
+      } );
+
+      function addComment(id){
+        actionVal = $('#commentForm').attr('action');
+        newActionVal = actionVal + id;
+        dialog.dialog("open");
+      }
+    </script>
 	</head>
 
 	<body>
 	<header>Echo Group Message Board Page</header>
+
+  <div id="dialog-form" title="Add New Comment">
+    <p class="validateTips">Enter your comment below.</p>
+
+  <form id="commentForm" action="/post/comment/" method="POST">
+    <fieldset>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" readonly value=<%= username %> class="text ui-widget-content ui-corner-all">
+      <label for="comment">Comment</label>
+      <textarea type="text" name="comment" rows="3" id="comment" class="text ui-widget-content ui-corner-all"></textarea>
+
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div>
+
 	<div id="page_content">
 		<h1 class="top_message">Welcome to the Echo Group Message Board Page</h1>
 		<form id="new_post_form" action="/post/message" method="POST">
@@ -26,16 +80,16 @@
 			<h5 style="margin-left: 20px; color: blue"><%= post[x].comments[i].name %>, <%= post[x].comments[i].date %></h5>
 			<h5 style="margin-left: 20px"><%= post[x].comments[i].text %></h5>
 			<% } %>
+
+      <button class="addComment" onclick="addComment('<%= post[x]._id %>')">Add Comment</button>
+
 		</div>
-		<br>
-		<form class="comment_form" action="/post/comment/<%= post[x]._id %>" method="POST">
-			<h3>New Comment</h3>
-			<label>Name: </label><input type="text" name="name" required="true">
-			<label>Comment: </label><input type="text" name="comment" required="true"><br><br>
-			<input type="submit" value="Post Comment"><br>
-		</form><br>
+
+    <br>
 		<% } %>
 	</div>
+  <br>
+  <br>
 	<footer>Echo Team &copy; Fall 2017</footer>
 	</body>
 </html>
