@@ -17,6 +17,9 @@ module.exports = function(app) {
 	 app.post('/login', function(req, res){
 	 	users.login(req, res);
 	 })
+	app.get('/logout', function(req, res){
+		users.logout(req, res);
+	});
 	// route for creating one comment with the parent post id
 	app.post('/post/comment/:id', function (req, res){
 	  	posts.comment(req, res);

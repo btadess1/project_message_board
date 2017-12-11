@@ -19,6 +19,7 @@ module.exports = {
             var session = req.session;
             //set username to be displayed in message board
             session.username = user[0].last_name;
+            session.auth = true;
             console.log(user);
             error.err =0;
             res.redirect('/message/board');
@@ -39,5 +40,10 @@ module.exports = {
         res.redirect('/message/board');
       }
     })
+  },
+  logout: function(req, res) {
+    console.log("Logging User Out: " + req.session.username);
+    res.redirect("/");
+    req.session.auth = false;
   }
 }

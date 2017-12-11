@@ -20,7 +20,25 @@ app.set('view engine', 'ejs');
 // require session for setting username
 var session = require('express-session');
 //initialize the session (secret prop is required)
-app.use(session({secret: 'EchoAppp'}));
+app.use(session({
+  secret: 'EchoAppp',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      maxAge: 60000
+  }
+}));
+
+function authChecker(req, res, next) {
+  if (req.session.auth || req.path==='/' || req.path==='/login' || req.path==='/create/user') {
+    next();
+  } else {
+    console.log("Access Denied: " + req.path + " " + req.connection.remoteAddress);
+    res.redirect("/");
+  }
+}
+
+app.use(authChecker);
 
 var routes_setter = require('./server/config/routes.js');
 // invoke the function stored in routes_setter and pass it the "app" variable
