@@ -7,6 +7,7 @@
     <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
     <script>
       var dialog, form, actionVal, newActionVal;
+      var dialog2, form2, actionVal2, newActionVal2;
 
       $( function() {
 
@@ -18,7 +19,13 @@
           buttons: {
             "Add Comment": function(){
               $(form).attr("action", newActionVal);
-              $(form).submit();
+              var postVal = form.find("textarea");
+              if(postVal.val()){
+                $(form).submit();
+              }else{
+                alert("Please enter a comment!");
+              }
+
             },
             Cancel: function() {
               dialog.dialog( "close" );
@@ -38,6 +45,39 @@
         newActionVal = actionVal + id;
         dialog.dialog("open");
       }
+
+      $( function() {
+
+        dialog2 = $( "#post-form" ).dialog({
+          autoOpen: false,
+          height: 400,
+          width: 350,
+          modal: true,
+          buttons: {
+            "Add Post": function(){
+              var postVal = form2.find("textarea");
+              if(postVal.val()){
+                $(form2).submit();
+              }else{
+                alert("Please enter a message!");
+              }
+            },
+            Cancel: function() {
+              dialog2.dialog( "close" );
+            }
+          },
+          close: function() {
+            form2[ 0 ].reset();
+          }
+        });
+
+        form2 = dialog2.find( "form" );
+
+      } );
+
+      function addPost(){
+        dialog2.dialog("open");
+      }
     </script>
 	</head>
 
@@ -50,9 +90,9 @@
   <form id="commentForm" action="/post/comment/" method="POST">
     <fieldset>
       <label for="name">Name</label>
-      <input type="text" name="name" id="name" readonly value=<%= username %> class="text ui-widget-content ui-corner-all">
+      <input type="text" name="name" id="name" required="true" readonly value=<%= username %> class="text ui-widget-content ui-corner-all">
       <label for="comment">Comment</label>
-      <textarea type="text" name="comment" rows="3" id="comment" class="text ui-widget-content ui-corner-all"></textarea>
+      <textarea type="text" name="comment" required="true" rows="3" id="comment" class="text ui-widget-content ui-corner-all"></textarea>
 
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
@@ -60,17 +100,29 @@
   </form>
 </div>
 
+<div id="post-form" title="Add New Post">
+  <p class="validateTips">Enter your message below.</p>
+
+<form id="postForm" action="/post/message" method="POST">
+  <fieldset>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" required="true" readonly value=<%= username %> class="text ui-widget-content ui-corner-all">
+    <label for="comment">Post Message</label>
+    <textarea type="text" name="message" rows="3" id="comment" required="true" class="text ui-widget-content ui-corner-all"></textarea>
+
+    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+  </fieldset>
+</form>
+</div>
+
 	<div id="page_content">
 		<h1 class="top_message">Welcome to the Echo Group Message Board Page</h1>
-		<form id="new_post_form" action="/post/message" method="POST">
-			<h2>New Post</h2>
-			<label for="name_field">Name:</label>
-			<input type="text" id="name_field" name="name" required="true"><br>
-			<label for="message_field">Post a Message:</label>
-			<input type="text" id="message_field" name="message" required="true"><br>
-			<input type="submit" value="Post Message">
-		</form>
 
+    <br>
+    &nbsp;&nbsp;&nbsp;<button class="addPost" onclick="addPost()">Post New Message</button>
+    <br>
+    <br>
 		<% for(var x in post){ %>
 		<div style="background-color: lightblue; margin-left: 15px; padding: 15px; border-radius: 5px">
 			<h3 style="color: blue">Posted By: <%= post[x].name %>, Date: <%= post[x].date %></h3>

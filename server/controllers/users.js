@@ -32,6 +32,9 @@ module.exports = {
   },
   register: function(req, res) {
     var user = new User({last_name: req.body.last_name, email: req.body.email, password: req.body.password});
+    var session = req.session;
+    //set username to be displayed in message board
+    session.username = req.body.last_name;
     user.save(function(err) {
       if(err){
         console.log("something went wrong");
