@@ -133,3 +133,17 @@ form input[type=button]{
 	color: #000 !important;
 	background-color: #ccc !important;
 }
+#logoutBtn {
+	padding: 8px 16px;
+	float: right;
+	width: auto;
+	border: none;
+	outline: none;
+	display: inline;
+	cursor: pointer;
+	text-align: center;
+	background-color: #454545;
+}
+#logoutBtn:hover {
+	background-color: #666666;
+}
